@@ -21,9 +21,11 @@ def main():
     content = fetch_page_content(args.vessel)
     lat, lon = extract_lat_lon(content)
     lon_min, lat_min, lon_max, lat_max = tuple(map(float, args.bbox.split(',')))
-    vessel_inside = lat_min <= lat <= lat_max and lon_min <= lon <= lon_max
-    print(f'{args.vessel} is at {lat} N {lon} E, '
-          f'{"in" if vessel_inside else "out"}side {args.bbox}')
+    vessel_inside = \
+        lat_min <= lat <= lat_max and is_lon_in_range(lon_min, lon_max, lon)
+    if vessel_inside or not args.cronmode:
+        print(f'{args.vessel} is at {lat} N {lon} E, '
+              f'{"in" if vessel_inside else "out"}side {args.bbox}')
 
 
 def fetch_page_content(vessel_id: str) -> str:
@@ -42,6 +44,16 @@ def extract_lat_lon(page_content: str) -> Tuple[float, float]:
     lat = extract_first_float(soup.find_all(class_='coordinate lat'))
     lon = extract_first_float(soup.find_all(class_='coordinate lon'))
     return lat, lon
+
+
+def is_lon_in_range(lon_min: float, lon_max: float, lon: float) -> bool:
+    lon_min_norm = (lon_min + 360) % 360
+    lon_max_norm = (lon_max + 360) % 360
+    lon_norm = (lon + 360) % 360
+    if lon_min_norm <= lon_max_norm:
+        return lon_min_norm <= lon_norm <= lon_max_norm
+    else:
+        return lon_norm < lon_max_norm or lon_norm > lon_min_norm
 
 
 def extract_first_float(tags: List[Tag]) -> float:
