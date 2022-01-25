@@ -1,4 +1,4 @@
-from main import extract_lat_lon, is_lon_in_range
+from shipalert.shipalert import extract_lat_lon, is_lon_in_range
 
 
 def test_extract_lat_lon():

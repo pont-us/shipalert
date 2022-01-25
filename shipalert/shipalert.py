@@ -15,7 +15,7 @@ def main():
                         help='decimal degrees. Format: '
                              '<min-lon>,<min-lat>,<max-lon>,<max-lat>')
     parser.add_argument('cronmode', action='store_true',
-                        help='Only write output if vessel is in box.')
+                        help='Only write output if vessel is in bbox.')
     args = parser.parse_args()
 
     content = fetch_page_content(args.vessel)
