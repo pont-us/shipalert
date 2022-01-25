@@ -1,8 +1,12 @@
+import os
+
 from shipalert.shipalert import extract_lat_lon, is_lon_in_range
+
+cwd = os.path.abspath(os.path.dirname(__file__))
 
 
 def test_extract_lat_lon():
-    with open('/home/pont/test.html', 'r') as fh:
+    with open(os.path.join(cwd, 'sample_input.html'), 'r') as fh:
         content = fh.read()
     lat, lon = extract_lat_lon(content)
     assert 34.55643 == lat
