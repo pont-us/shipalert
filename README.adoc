@@ -1,1 +1,59 @@
-TODO
+= shipalert
+
+shipalert reports whether a vessel is in currently within a specified
+geographical bounding box.
+
+shipalert obtains vessel positions by scraping the HTML from
+https://www.vesselfinder.com[VesselFinder], which limits its reliability.
+VesselFinder offers a subscription API for more serious applications.
+
+== Installation
+
+From the parent directory of the repository:
+
+[source,bash]
+----
+python -m pip install shipalert/
+----
+
+A conda environment file is supplied. It can optionally be used to install
+dependencies with conda. From the repository root directory:
+
+[source,bash]
+----
+conda env create
+conda activate shipalert
+----
+
+== Usage
+
+----
+usage: shipalert [-h] [--cronmode] Vessel-ID Bounding-box
+
+positional arguments:
+  Vessel-ID     As it appears in the vesselfinder.com URL
+  Bounding-box  decimal degrees. Format: <min-lon>,<min-lat>,<max-lon>,<max-
+                lat>
+
+optional arguments:
+  -h, --help    show this help message and exit
+  --cronmode    Only write output if vessel is in bbox.
+----
+
+The vessel ID corresponds to the last part of the URL in the vessel’s page at
+<https://www.vesselfinder.com>. (It is composed of the vessel name, IMO number,
+and Maritime Mobile Service Identity.)
+
+== Example
+
+To check whether the _Viking Grace_ is currently in the Archipelago Sea:
+
+[source,bash]
+----
+shipalert VIKING-GRACE-IMO-9606900-MMSI-230629000 19.7,59.8,23.0,60.9
+----
+
+== Copyright
+
+shipalert is copyright 2002 by Pontus Lurcock (pont at talvi dot net)
+and released under the MIT license. See the file LICENSE.txt for details.

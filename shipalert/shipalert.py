@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""Check whether a vessel is within a specified bounding box
+
+Copyright 2022 by Pontus Lurcock
+Released under the MIT license; see the file LICENSE.txt for details.
+"""
+
 from typing import Tuple, List
 from bs4 import BeautifulSoup
 from bs4.element import Tag
