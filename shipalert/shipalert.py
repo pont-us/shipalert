@@ -14,7 +14,7 @@ def main():
     parser.add_argument('bbox', metavar='Bounding-box', type=str,
                         help='decimal degrees. Format: '
                              '<min-lon>,<min-lat>,<max-lon>,<max-lat>')
-    parser.add_argument('cronmode', action='store_true',
+    parser.add_argument('--cronmode', action='store_true',
                         help='Only write output if vessel is in bbox.')
     args = parser.parse_args()
 
