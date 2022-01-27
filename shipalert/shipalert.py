@@ -30,8 +30,10 @@ def main():
     vessel_inside = \
         lat_min <= lat <= lat_max and is_lon_in_range(lon_min, lon_max, lon)
     if vessel_inside or not args.cronmode:
-        print(f'{args.vessel} is at {lat} N {lon} E, '
-              f'{"in" if vessel_inside else "out"}side {args.bbox}')
+        print('%s is at %f N %f E, %s %s'
+              % (args.vessel, lat, lon,
+                 'inside' if vessel_inside else 'outside',
+                 args.bbox))
 
 
 def fetch_page_content(vessel_id: str) -> str:
@@ -39,7 +41,7 @@ def fetch_page_content(vessel_id: str) -> str:
                  'AppleWebKit/537.36 (KHTML, like Gecko) ' \
                  'Chrome/96.0.4664.110 Safari/537.36'
     response = requests.get(
-        f'https://www.vesselfinder.com/vessels/{vessel_id}',
+        'https://www.vesselfinder.com/vessels/%s' % vessel_id,
         headers={'user-agent': user_agent}
     )
     return response.text
@@ -70,7 +72,7 @@ def extract_first_float(tags: List[Tag]) -> float:
             return float(content)
         except ValueError:
             pass
-    raise ValueError(f'No valid floats in {tags}')
+    raise ValueError('No valid floats in ' + str(tags))
 
 
 if __name__ == '__main__':

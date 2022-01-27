@@ -8,7 +8,7 @@ with open(os.path.join(cwd, "README.adoc")) as fh:
     long_desc = fh.read()
 
 setup(name="shipalert",
-      version="1.0.0",
+      version="1.0.1",
       description="Report whether a vessel is within a bounding box",
       long_description_content_type="text/asciidoc",
       long_description=long_desc,
