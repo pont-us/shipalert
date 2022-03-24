@@ -61,7 +61,7 @@ def is_lon_in_range(lon_min: float, lon_max: float, lon: float) -> bool:
     if lon_min_norm <= lon_max_norm:
         return lon_min_norm <= lon_norm <= lon_max_norm
     else:
-        return lon_norm < lon_max_norm or lon_norm > lon_min_norm
+        return lon_norm <= lon_max_norm or lon_norm >= lon_min_norm
 
 
 def extract_first_float(tags: List[Tag]) -> float:
