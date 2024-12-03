@@ -55,5 +55,5 @@ shipalert VIKING-GRACE-IMO-9606900-MMSI-230629000 19.7,59.8,23.0,60.9
 
 == Copyright
 
-shipalert is copyright 2002 by Pontus Lurcock (pont at talvi dot net)
+shipalert is copyright 2022 by Pontus Lurcock (pont at talvi dot net)
 and released under the MIT license. See the file LICENSE.txt for details.
